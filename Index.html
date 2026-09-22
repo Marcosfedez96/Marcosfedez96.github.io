@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marcos Fernandez | Desarrollador backend .NET</title>
+<meta name="description" content="Portafolio de Marcos Fernandez, desarrollador backend .NET: APIs REST con C# y ASP.NET Core.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5fb;
+    --surface: #ffffff;
+    --ink: #1b1830;
+    --muted: #625f7a;
+    --line: #dcd9ea;
+    --accent: #512bd4;
+    --accent-ink: #ffffff;
+    --ok: #17784a;
+    --wip: #9a5b00;
+    --plan: #625f7a;
+    --code-bg: #1b1830;
+    --code-ink: #e9e6ff;
+    --code-key: #b7a6ff;
+    --code-str: #8fe0b4;
+    --code-dim: #8e8aab;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14121f;
+      --surface: #1c192b;
+      --ink: #eeecf8;
+      --muted: #a29fba;
+      --line: #322e47;
+      --accent: #a794ff;
+      --accent-ink: #14121f;
+      --ok: #62d49b;
+      --wip: #f0b95c;
+      --plan: #a29fba;
+      --code-bg: #0e0c17;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { width: min(1080px, 100% - 2.5rem); margin-inline: auto; }
+
+  /* Barra superior */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1rem; }
+  .brand { font-weight: 600; color: var(--ink); text-decoration: none; }
+  .nav { display: flex; gap: 1.5rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--ink); text-decoration: underline; }
+
+  /* Hero */
+  .hero { padding-block: clamp(3rem, 8vw, 6rem); }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+  h1 {
+    margin: 0 0 1.25rem;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+  .lead { margin: 0 0 2rem; max-width: 34rem; color: var(--muted); font-size: 1.2rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    border: 1px solid var(--accent);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-ghost { color: var(--accent); }
+  .btn-ghost:hover { background: var(--surface); }
+
+  /* Panel de respuesta de la API */
+  .response {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    border-radius: 10px;
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    overflow: hidden;
+    box-shadow: 0 1px 0 var(--line);
+  }
+  .response-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: var(--code-dim);
+    font-size: 0.85rem;
+  }
+  .response-head strong { color: var(--code-str); font-weight: 500; }
+  .response pre { margin: 0; padding: 1rem 1.1rem 1.2rem; overflow-x: auto; }
+  .k { color: var(--code-key); }
+  .s { color: var(--code-str); }
+  .d { color: var(--code-dim); }
+
+  /* Secciones */
+  section { padding-block: clamp(2.5rem, 6vw, 4.5rem); border-top: 1px solid var(--line); }
+  h2 { margin: 0 0 2rem; font-size: 1.9rem; letter-spacing: -0.02em; font-weight: 600; }
+
+  /* Proyectos */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: 1.5rem;
+  }
+  .project {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+  .project > div:last-child { display: flex; flex-direction: column; flex: 1; }
+  .status { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1rem; font-family: var(--mono); font-size: 0.9rem; line-height: 1.4; }
+  .status .code { font-size: 1.5rem; font-weight: 500; }
+  .status .label { color: var(--muted); }
+  .status-ok .code { color: var(--ok); }
+  .status-wip .code { color: var(--wip); }
+  .status-plan .code { color: var(--plan); }
+  .project h3 { margin: 0 0 0.5rem; font-size: 1.45rem; font-weight: 600; letter-spacing: -0.01em; }
+  .project p { margin: 0 0 1rem; max-width: 42rem; }
+  .project ul { margin: 0 0 1.25rem; padding-left: 1.2rem; max-width: 42rem; color: var(--muted); }
+  .project li { margin-bottom: 0.3rem; }
+  .meta { margin: 0 0 1rem; font-size: 0.95rem; color: var(--muted); }
+  .meta strong { color: var(--ink); font-weight: 500; }
+  .links { display: flex; gap: 1.25rem; flex-wrap: wrap; font-weight: 500; margin-top: auto; }
+
+  /* Stack */
+  .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 2rem; margin: 0; }
+  .stack dt { font-weight: 600; margin-bottom: 0.3rem; }
+  .stack dd { margin: 0; color: var(--muted); }
+
+  /* Contacto */
+  .contact p { max-width: 36rem; color: var(--muted); margin: 0 0 1.5rem; }
+  .contact-list { display: flex; flex-wrap: wrap; gap: 0.75rem; padding: 0; margin: 0; list-style: none; }
+
+  footer { border-top: 1px solid var(--line); padding-block: 1.5rem; color: var(--muted); font-size: 0.9rem; }
+
+  @media (max-width: 800px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    .nav { gap: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Marcos Fernandez</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#stack">Stack</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Desarrollador backend .NET</h1>
+        <p class="lead">
+          Desarrollo APIs REST con C# y ASP.NET Core. Cada proyecto lo armo de punta a punta
+          y dejo el código público en GitHub. Busco mi primera posición como desarrollador backend.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+          <a class="btn btn-ghost" href="#contacto">Contactarme</a>
+        </div>
+      </div>
+
+      <div class="response" role="img" aria-label="Resumen del perfil en formato JSON">
+        <div class="response-head">
+          <span>GET /api/desarrollador</span>
+          <strong>200 OK</strong>
+        </div>
+<pre><span class="d">{</span>
+  <span class="k">"nombre"</span>: <span class="s">"Marcos Fernandez"</span>,
+  <span class="k">"rol"</span>: <span class="s">"Backend .NET"</span>,
+  <span class="k">"lenguaje"</span>: <span class="s">"C#"</span>,
+  <span class="k">"framework"</span>: <span class="s">"ASP.NET Core"</span>,
+  <span class="k">"datos"</span>: <span class="d">[</span><span class="s">"SQL Server"</span>, <span class="s">"ADO.NET"</span><span class="d">]</span>,
+  <span class="k">"buscaTrabajo"</span>: <span class="s">true</span>
+<span class="d">}</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <section id="proyectos" aria-labelledby="t-proyectos">
+    <div class="wrap">
+      <h2 id="t-proyectos">Proyectos</h2>
+
+    
+
+      <div class="projects">
+
+      <article class="project">
+        <div class="status status-wip">
+          <span class="code">202</span>
+          <span class="label">En desarrollo</span>
+        </div>
+        <div>
+          <h3>API REST de veterinaria</h3>
+          <p>
+            API REST para gestionar mascotas, dueños, veterinarios y turnos. Ya funciona el CRUD de
+            mascotas con filtros y validaciones; el resto de las entidades se suma por etapas.
+          </p>
+          <ul>
+            <li>CRUD de mascotas con controller y status codes correctos.</li>
+            <li>Route constraints y model binding explícito desde ruta, cuerpo y query string.</li>
+            <li>Filtros combinables por query string.</li>
+            <li>Validación con Data Annotations más reglas de negocio entre campos.</li>
+            <li>Documentación interactiva con Scalar.</li>
+          </ul>
+          <p class="meta"><strong>Tecnologías:</strong> C#, .NET 10, ASP.NET Core Web API</p>
+          <div class="links">
+            <a href="https://github.com/Marcosfedez96/Veterinaria-API">Ver código</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="status status-wip">
+          <span class="code">202</span>
+          <span class="label">Recién iniciado</span>
+        </div>
+        <div>
+          <h3>API REST de biblioteca</h3>
+          <p>
+            API REST para gestionar libros, socios y préstamos, con un cliente de escritorio en WPF
+            que la consuma. Recién empiezo.
+          </p>
+          <p class="meta"><strong>Tecnologías:</strong> C#, .NET 10, ASP.NET Core Web API</p>
+          <div class="links">
+            <a href="https://github.com/Marcosfedez96/Biblioteca-API">Ver código</a>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack" aria-labelledby="t-stack">
+    <div class="wrap">
+      <h2 id="t-stack">Stack</h2>
+      <dl class="stack">
+        <div><dt>Lenguaje</dt><dd>C#, programación orientada a objetos</dd></div>
+        <div><dt>Backend</dt><dd>.NET 10, ASP.NET Core Web API</dd></div>
+        <div><dt>Datos</dt><dd>SQL Server, ADO.NET (Microsoft.Data.SqlClient)</dd></div>
+        <div><dt>Documentación de API</dt><dd>OpenAPI, Scalar</dd></div>
+        <div><dt>Escritorio</dt><dd>WPF</dd></div>
+        <div><dt>Herramientas</dt><dd>Visual Studio, Git, GitHub</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact" aria-labelledby="t-contacto">
+    <div class="wrap">
+      <h2 id="t-contacto">Contacto</h2>
+      <p>Busco una posición backend .NET donde pueda seguir creciendo en APIs REST y bases de datos. Escribime.</p>
+      <ul class="contact-list">
+        <li><a class="btn btn-primary" href="mailto:marcosef4496@gmail.com">Enviar email</a></li>
+        <li><a class="btn btn-ghost" href="https://www.linkedin.com/in/marcos-fernández-62ba751b8">LinkedIn</a></li>
+        <li><a class="btn btn-ghost" href="https://github.com/Marcosfedez96">GitHub</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">Marcos Fernandez, desarrollador backend .NET. Argentina.</div>
+</footer>
+
+</body>
+</html>
