@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Marcos Fernandez | Desarrollador backend .NET</title>
-<meta name="description" content="Portafolio de Marcos Fernandez, desarrollador backend .NET: APIs REST con C# y ASP.NET Core.">
+<title>Marcos Fernández | Desarrollador backend .NET</title>
+<link rel="icon" type="image/jpg" href="img/logo.jpg">
+<meta name="description" content="Portafolio de Marcos Fernández, desarrollador backend .NET: APIs REST con C# y ASP.NET Core.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -99,35 +100,65 @@
   .btn-ghost { color: var(--accent); }
   .btn-ghost:hover { background: var(--surface); }
 
-  /* Panel de respuesta de la API */
-  .response {
+  /* Tarjetas de "API" (hero estático + stack interactivo): mismo lenguaje visual */
+  .api-card {
     background: var(--code-bg);
     color: var(--code-ink);
     border-radius: 10px;
     font-family: var(--mono);
-    font-size: 0.92rem;
-    line-height: 1.7;
     overflow: hidden;
     box-shadow: 0 1px 0 var(--line);
   }
+  .api-card pre { margin: 0; padding: 0.9rem 1rem; overflow-x: auto; line-height: 1.7; font-size: 0.88rem; }
   .response-head {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1rem;
-    padding: 0.75rem 1.1rem;
+    padding: 0.75rem 1rem;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     color: var(--code-dim);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
-  .response-head strong { color: var(--code-str); font-weight: 500; }
-  .response pre { margin: 0; padding: 1rem 1.1rem 1.2rem; overflow-x: auto; }
+  .response-head strong { color: var(--ok); font-weight: 600; }
+
+  /* Endpoint clickeable (usado en Stack): botón que despliega la respuesta */
+  .api-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    color: var(--code-ink);
+    font-family: var(--mono);
+    font-size: 0.83rem;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .api-btn:hover { background: rgba(255, 255, 255, 0.05); }
+  .api-btn span { color: var(--code-key); font-weight: 500; }
+  .api-btn .action-tag { color: var(--code-str); font-size: 0.75rem; }
+  .response-body { display: none; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0, 0, 0, 0.2); }
+  .response-body .response-head { border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.75rem; }
+  .response-body pre { padding: 0.8rem 1rem; }
+
   .k { color: var(--code-key); }
   .s { color: var(--code-str); }
   .d { color: var(--code-dim); }
 
-  /* Secciones */
+  /* Secciones generales */
   section { padding-block: clamp(2.5rem, 6vw, 4.5rem); border-top: 1px solid var(--line); }
   h2 { margin: 0 0 2rem; font-size: 1.9rem; letter-spacing: -0.02em; font-weight: 600; }
+
+  /* Stack: grilla de endpoints */
+  .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 0; }
+  @media (max-width: 900px) {
+    .stack-grid { grid-template-columns: 1fr; }
+  }
 
   /* Proyectos */
   .projects {
@@ -158,10 +189,30 @@
   .meta strong { color: var(--ink); font-weight: 500; }
   .links { display: flex; gap: 1.25rem; flex-wrap: wrap; font-weight: 500; margin-top: auto; }
 
-  /* Stack */
-  .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 2rem; margin: 0; }
-  .stack dt { font-weight: 600; margin-bottom: 0.3rem; }
-  .stack dd { margin: 0; color: var(--muted); }
+  /* Detalle desplegable dentro de cada proyecto (mismo lenguaje que los endpoints del Stack) */
+  .detail-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .detail-toggle:hover { text-decoration: underline; }
+  .project-details { display: none; }
+
+  /* Educación: reutiliza .project pero más compacta */
+  .edu-card { padding: 1.25rem 1.5rem; }
+  .edu-card .status { margin-bottom: 0.5rem; }
+  .edu-card .status .code { font-size: 1.2rem; }
+  .edu-card p { margin-bottom: 0.4rem; }
+  .edu-card p:last-child { margin-bottom: 0; }
 
   /* Contacto */
   .contact p { max-width: 36rem; color: var(--muted); margin: 0 0 1.5rem; }
@@ -182,10 +233,11 @@
 
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="#inicio">Marcos Fernandez</a>
+    <a class="brand" href="#inicio">Marcos Fernández</a>
     <nav class="nav" aria-label="Principal">
-      <a href="#proyectos">Proyectos</a>
       <a href="#stack">Stack</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#educacion">Educación</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </div>
@@ -207,89 +259,216 @@
         </div>
       </div>
 
-      <div class="response" role="img" aria-label="Resumen del perfil en formato JSON">
+      <div class="api-card" role="img" aria-label="Resumen del perfil en formato JSON">
         <div class="response-head">
           <span>GET /api/desarrollador</span>
           <strong>200 OK</strong>
         </div>
-<pre><span class="d">{</span>
-  <span class="k">"nombre"</span>: <span class="s">"Marcos Fernandez"</span>,
+        <pre><span class="d">{</span>
+  <span class="k">"nombre"</span>: <span class="s">"Marcos Fernández"</span>,
   <span class="k">"rol"</span>: <span class="s">"Backend .NET"</span>,
-  <span class="k">"lenguaje"</span>: <span class="s">"C#"</span>,
-  <span class="k">"framework"</span>: <span class="s">"ASP.NET Core"</span>,
-  <span class="k">"datos"</span>: <span class="d">[</span><span class="s">"SQL Server"</span>, <span class="s">"ADO.NET"</span><span class="d">]</span>,
-  <span class="k">"buscaTrabajo"</span>: <span class="s">true</span>
+  <span class="k">"buscandoEmpleo"</span>: <span class="s">true</span>
 <span class="d">}</span></pre>
       </div>
     </div>
   </div>
 
-  <section id="proyectos" aria-labelledby="t-proyectos">
+  <section id="stack" aria-labelledby="t-stack">
     <div class="wrap">
-      <h2 id="t-proyectos">Proyectos</h2>
+      <h2 id="t-stack">Stack</h2>
+      <div class="stack-grid">
 
-    
-
-      <div class="projects">
-
-<article class="project">
-  <div class="status status-wip">
-    <span class="code">202</span>
-    <span class="label">En desarrollo</span>
-  </div>
-  <div>
-    <h3>API REST de veterinaria</h3>
-    <p>
-      API REST para gestionar mascotas, dueños, veterinarios y turnos, persistida en SQL Server
-      con Entity Framework Core. Los CRUDs de mascotas y veterinarios ya funcionan completos;
-      dueños y turnos (con sus relaciones) se suman en la etapa siguiente.
-    </p>
-    <ul>
-      <li>CRUD de mascotas y veterinarios con controllers y status codes correctos.</li>
-      <li>Route constraints y model binding explícito desde ruta, cuerpo y query string.</li>
-      <li>Filtros combinables por query string.</li>
-      <li>Validación con Data Annotations más reglas de negocio entre campos.</li>
-      <li>Persistencia real con Entity Framework Core + SQL Server (migraciones).</li>
-      <li>Documentación interactiva con Scalar.</li>
-    </ul>
-    <p class="meta"><strong>Tecnologías:</strong> C#, .NET 10, ASP.NET Core Web API, EF Core, SQL Server</p>
-    <div class="links">
-      <a href="https://github.com/Marcosfedez96/Veterinaria-API">Ver código</a>
-    </div>
-  </div>
-</article>
-      <article class="project">
-        <div class="status status-wip">
-          <span class="code">202</span>
-          <span class="label">Recién iniciado</span>
-        </div>
-        <div>
-          <h3>API REST de biblioteca</h3>
-          <p>
-            API REST para gestionar libros, socios y préstamos, con un cliente de escritorio en WPF
-            que la consuma. Recién empiezo.
-          </p>
-          <p class="meta"><strong>Tecnologías:</strong> C#, .NET 10, ASP.NET Core Web API</p>
-          <div class="links">
-            <a href="https://github.com/Marcosfedez96/Biblioteca-API">Ver código</a>
+        <div class="api-card">
+          <button class="api-btn" onclick="toggleEndpoint('res-lenguaje', this)" aria-expanded="false" aria-controls="res-lenguaje">
+            <span>GET /api/stack/lenguaje</span>
+            <span class="action-tag">Enviar ➔</span>
+          </button>
+          <div id="res-lenguaje" class="response-body">
+            <div class="response-head">
+              <span>application/json</span>
+              <strong>200 OK</strong>
+            </div>
+            <pre><span class="d">{</span>
+  <span class="k">"lenguaje"</span>: <span class="s">"C#"</span>,
+  <span class="k">"paradigma"</span>: <span class="s">"POO"</span>,
+  <span class="k">"query"</span>: <span class="s">"LINQ"</span>
+<span class="d">}</span></pre>
           </div>
         </div>
-      </article>
+
+        <div class="api-card">
+          <button class="api-btn" onclick="toggleEndpoint('res-backend', this)" aria-expanded="false" aria-controls="res-backend">
+            <span>GET /api/stack/backend</span>
+            <span class="action-tag">Enviar ➔</span>
+          </button>
+          <div id="res-backend" class="response-body">
+            <div class="response-head">
+              <span>application/json</span>
+              <strong>200 OK</strong>
+            </div>
+            <pre><span class="d">{</span>
+  <span class="k">"runtime"</span>: <span class="s">".NET"</span>,
+  <span class="k">"framework"</span>: <span class="s">"ASP.NET Core"</span>
+<span class="d">}</span></pre>
+          </div>
+        </div>
+
+        <div class="api-card">
+          <button class="api-btn" onclick="toggleEndpoint('res-datos', this)" aria-expanded="false" aria-controls="res-datos">
+            <span>GET /api/stack/datos</span>
+            <span class="action-tag">Enviar ➔</span>
+          </button>
+          <div id="res-datos" class="response-body">
+            <div class="response-head">
+              <span>application/json</span>
+              <strong>200 OK</strong>
+            </div>
+            <pre><span class="d">{</span>
+  <span class="k">"db"</span>: <span class="s">"SQL Server"</span>,
+  <span class="k">"orm"</span>: <span class="s">"EF Core"</span>,
+  <span class="k">"driver"</span>: <span class="s">"ADO.NET"</span>
+<span class="d">}</span></pre>
+          </div>
+        </div>
+
+        <div class="api-card">
+          <button class="api-btn" onclick="toggleEndpoint('res-doc', this)" aria-expanded="false" aria-controls="res-doc">
+            <span>GET /api/stack/documentacion</span>
+            <span class="action-tag">Enviar ➔</span>
+          </button>
+          <div id="res-doc" class="response-body">
+            <div class="response-head">
+              <span>application/json</span>
+              <strong>200 OK</strong>
+            </div>
+            <pre><span class="d">{</span>
+  <span class="k">"standard"</span>: <span class="s">"OpenAPI"</span>,
+  <span class="k">"ui"</span>: <span class="s">"Scalar"</span>
+<span class="d">}</span></pre>
+          </div>
+        </div>
+
+        <div class="api-card">
+          <button class="api-btn" onclick="toggleEndpoint('res-escritorio', this)" aria-expanded="false" aria-controls="res-escritorio">
+            <span>GET /api/stack/escritorio</span>
+            <span class="action-tag">Enviar ➔</span>
+          </button>
+          <div id="res-escritorio" class="response-body">
+            <div class="response-head">
+              <span>application/json</span>
+              <strong>200 OK</strong>
+            </div>
+            <pre><span class="d">{</span>
+  <span class="k">"framework"</span>: <span class="s">"WPF"</span>,
+  <span class="k">"markup"</span>: <span class="s">"XAML"</span>
+<span class="d">}</span></pre>
+          </div>
+        </div>
+
+        <div class="api-card">
+          <button class="api-btn" onclick="toggleEndpoint('res-herramientas', this)" aria-expanded="false" aria-controls="res-herramientas">
+            <span>GET /api/stack/herramientas</span>
+            <span class="action-tag">Enviar ➔</span>
+          </button>
+          <div id="res-herramientas" class="response-body">
+            <div class="response-head">
+              <span>application/json</span>
+              <strong>200 OK</strong>
+            </div>
+            <pre><span class="d">{</span>
+  <span class="k">"ide"</span>: <span class="s">"Visual Studio"</span>,
+  <span class="k">"git"</span>: <span class="s">"GitHub"</span>
+<span class="d">}</span></pre>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section id="stack" aria-labelledby="t-stack">
+  <section id="proyectos" aria-labelledby="t-proyectos">
     <div class="wrap">
-      <h2 id="t-stack">Stack</h2>
-      <dl class="stack">
-        <div><dt>Lenguaje</dt><dd>C#, programación orientada a objetos</dd></div>
-        <div><dt>Backend</dt><dd>.NET 10, ASP.NET Core Web API</dd></div>
-        <div><dt>Datos</dt><dd>SQL Server, ADO.NET (Microsoft.Data.SqlClient)</dd></div>
-        <div><dt>Documentación de API</dt><dd>OpenAPI, Scalar</dd></div>
-        <div><dt>Escritorio</dt><dd>WPF</dd></div>
-        <div><dt>Herramientas</dt><dd>Visual Studio, Git, GitHub</dd></div>
-      </dl>
+      <h2 id="t-proyectos">Proyectos</h2>
+      <div class="projects">
+
+        <article class="project">
+          <div class="status status-wip">
+            <span class="code">202</span>
+            <span class="label">En desarrollo</span>
+          </div>
+          <div>
+            <h3>API REST de veterinaria</h3>
+            <p>
+              API REST para gestionar mascotas, dueños, veterinarios y turnos, persistida en SQL Server
+              con Entity Framework Core.
+            </p>
+            <button class="detail-toggle" onclick="toggleDetails('detalle-veterinaria', this)" aria-expanded="false" aria-controls="detalle-veterinaria">
+              <span>Ver detalles</span>
+              <span class="action-tag">➔</span>
+            </button>
+            <div id="detalle-veterinaria" class="project-details">
+              <ul>
+                <li>CRUD de mascotas y veterinarios con controllers y status codes correctos.</li>
+                <li>Route constraints y model binding explícito desde ruta, cuerpo y query string.</li>
+                <li>Filtros combinables por query string.</li>
+                <li>Validación con Data Annotations más reglas de negocio entre campos.</li>
+                <li>Persistencia real con Entity Framework Core + SQL Server (migraciones).</li>
+                <li>Documentación interactiva con Scalar.</li>
+              </ul>
+            </div>
+            <p class="meta"><strong>Tecnologías:</strong> C#, .NET 10, ASP.NET Core Web API, EF Core, SQL Server</p>
+            <div class="links">
+              <a href="https://github.com/Marcosfedez96/Veterinaria-API" target="_blank" rel="noopener noreferrer">Ver código</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="status status-wip">
+            <span class="code">202</span>
+            <span class="label">En desarrollo</span>
+          </div>
+          <div>
+            <h3>API REST de biblioteca</h3>
+            <p>
+              API REST para gestionar libros, socios y préstamos conectada a SQL Server con Entity Framework Core,
+              acompañada de un cliente de escritorio en WPF que la consume.
+            </p>
+            <button class="detail-toggle" onclick="toggleDetails('detalle-biblioteca', this)" aria-expanded="false" aria-controls="detalle-biblioteca">
+              <span>Ver detalles</span>
+              <span class="action-tag">➔</span>
+            </button>
+            <div id="detalle-biblioteca" class="project-details">
+              <ul>
+                <li>CRUD completo de libros, socios y préstamos con persistencia real en base de datos.</li>
+                <li>Uso de Entity Framework Core para el mapeo objeto-relacional y migraciones.</li>
+                <li>Cliente WPF con pestañas por entidad, consumiendo los endpoints de la API.</li>
+              </ul>
+            </div>
+            <p class="meta"><strong>Tecnologías:</strong> C#, .NET 10, ASP.NET Core Web API, EF Core, SQL Server, WPF, XAML</p>
+            <div class="links">
+              <a href="https://github.com/Marcosfedez96/Biblioteca-API" target="_blank" rel="noopener noreferrer">Ver código</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="educacion" aria-labelledby="t-educacion">
+    <div class="wrap">
+      <h2 id="t-educacion">Educación</h2>
+      <div class="projects">
+        <article class="project edu-card">
+          <div class="status status-ok">
+            <span class="code">UTN</span>
+            <span class="label">Facultad Regional General Pacheco</span>
+          </div>
+          <p class="meta">Cursando Tecnicatura Universitaria en Programación</p>
+          <p class="meta"><strong>Enfoque:</strong> Programación, Arquitectura de Computadoras, Sistemas Operativos y Bases de Datos.</p>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -298,9 +477,9 @@
       <h2 id="t-contacto">Contacto</h2>
       <p>Busco una posición backend .NET donde pueda seguir creciendo en APIs REST y bases de datos. Escribime.</p>
       <ul class="contact-list">
-        <li><a class="btn btn-primary" href="mailto:marcosef4496@gmail.com">Enviar email</a></li>
-        <li><a class="btn btn-ghost" href="https://www.linkedin.com/in/marcos-fernández-62ba751b8">LinkedIn</a></li>
-        <li><a class="btn btn-ghost" href="https://github.com/Marcosfedez96">GitHub</a></li>
+        <li><a class="btn btn-primary" href="mailto:marcosfedez96.contacto@gmail.com">Enviar email</a></li>
+        <li><a class="btn btn-ghost" href="https://www.linkedin.com/in/marcos-fernández-62ba751b8" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a class="btn btn-ghost" href="https://github.com/Marcosfedez96" target="_blank" rel="noopener noreferrer">GitHub</a></li>
       </ul>
     </div>
   </section>
@@ -308,8 +487,32 @@
 </main>
 
 <footer>
-  <div class="wrap">Marcos Fernandez, desarrollador backend .NET. Argentina.</div>
+  <div class="wrap">Marcos Fernández, desarrollador backend .NET. Argentina.</div>
 </footer>
+
+<script>
+  function toggleEndpoint(id, btn) {
+    const body = document.getElementById(id);
+    const tag = btn.querySelector('.action-tag');
+    const isOpen = body.style.display === 'block';
+
+    body.style.display = isOpen ? 'none' : 'block';
+    tag.textContent = isOpen ? 'Enviar ➔' : 'Ocultar ✖';
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  }
+
+  function toggleDetails(id, btn) {
+    const body = document.getElementById(id);
+    const label = btn.querySelector('span:first-child');
+    const icon = btn.querySelector('.action-tag');
+    const isOpen = body.style.display === 'block';
+
+    body.style.display = isOpen ? 'none' : 'block';
+    label.textContent = isOpen ? 'Ver detalles' : 'Ocultar detalles';
+    icon.textContent = isOpen ? '➔' : '✖';
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  }
+</script>
 
 </body>
 </html>
