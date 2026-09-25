@@ -232,31 +232,32 @@
 
       <div class="projects">
 
-      <article class="project">
-        <div class="status status-wip">
-          <span class="code">202</span>
-          <span class="label">En desarrollo</span>
-        </div>
-        <div>
-          <h3>API REST de veterinaria</h3>
-          <p>
-            API REST para gestionar mascotas, dueños, veterinarios y turnos. Ya funciona el CRUD de
-            mascotas con filtros y validaciones; el resto de las entidades se suma por etapas.
-          </p>
-          <ul>
-            <li>CRUD de mascotas con controller y status codes correctos.</li>
-            <li>Route constraints y model binding explícito desde ruta, cuerpo y query string.</li>
-            <li>Filtros combinables por query string.</li>
-            <li>Validación con Data Annotations más reglas de negocio entre campos.</li>
-            <li>Documentación interactiva con Scalar.</li>
-          </ul>
-          <p class="meta"><strong>Tecnologías:</strong> C#, .NET 10, ASP.NET Core Web API</p>
-          <div class="links">
-            <a href="https://github.com/Marcosfedez96/Veterinaria-API">Ver código</a>
-          </div>
-        </div>
-      </article>
-
+<article class="project">
+  <div class="status status-wip">
+    <span class="code">202</span>
+    <span class="label">En desarrollo</span>
+  </div>
+  <div>
+    <h3>API REST de veterinaria</h3>
+    <p>
+      API REST para gestionar mascotas, dueños, veterinarios y turnos, persistida en SQL Server
+      con Entity Framework Core. Los CRUDs de mascotas y veterinarios ya funcionan completos;
+      dueños y turnos (con sus relaciones) se suman en la etapa siguiente.
+    </p>
+    <ul>
+      <li>CRUD de mascotas y veterinarios con controllers y status codes correctos.</li>
+      <li>Route constraints y model binding explícito desde ruta, cuerpo y query string.</li>
+      <li>Filtros combinables por query string.</li>
+      <li>Validación con Data Annotations más reglas de negocio entre campos.</li>
+      <li>Persistencia real con Entity Framework Core + SQL Server (migraciones).</li>
+      <li>Documentación interactiva con Scalar.</li>
+    </ul>
+    <p class="meta"><strong>Tecnologías:</strong> C#, .NET 10, ASP.NET Core Web API, EF Core, SQL Server</p>
+    <div class="links">
+      <a href="https://github.com/Marcosfedez96/Veterinaria-API">Ver código</a>
+    </div>
+  </div>
+</article>
       <article class="project">
         <div class="status status-wip">
           <span class="code">202</span>
