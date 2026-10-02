@@ -407,14 +407,15 @@
               <span class="action-tag">➔</span>
             </button>
             <div id="detalle-veterinaria" class="project-details">
-              <ul>
-                <li>CRUD de mascotas y veterinarios con controllers y status codes correctos.</li>
-                <li>Route constraints y model binding explícito desde ruta, cuerpo y query string.</li>
-                <li>Filtros combinables por query string.</li>
-                <li>Validación con Data Annotations más reglas de negocio entre campos.</li>
-                <li>Persistencia real con Entity Framework Core + SQL Server (migraciones).</li>
-                <li>Documentación interactiva con Scalar.</li>
-              </ul>
+                <ul>
+                    <li>CRUD de mascotas, tutores, veterinarios y turnos con controllers y status codes correctos.</li>
+                    <li>Route constraints y model binding explícito desde ruta, cuerpo y query string.</li>
+                    <li>Filtros combinables por query string.</li>
+                    <li>Validación con Data Annotations más reglas de negocio entre campos (incluida validación de turnos superpuestos cruzando tablas).</li>
+                    <li>Persistencia real con Entity Framework Core + SQL Server (migraciones, relaciones entre entidades).</li>
+                    <li>DTOs de entrada y salida separados de las entidades de EF Core, evitando exponer el modelo de datos directamente.</li>
+                    <li>Documentación interactiva con Scalar.</li>
+                </ul>
             </div>
             <p class="meta"><strong>Tecnologías:</strong> C#, .NET 10, ASP.NET Core Web API, EF Core, SQL Server</p>
             <div class="links">
